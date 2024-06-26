@@ -17,6 +17,6 @@ int b = int.Parse(words[1]);
 int c = int.Parse(words[2]);
 
 Console.WriteLine((a + b) % c);
-Console.WriteLine((a % c) + (b % c) % c);
+Console.WriteLine(((a % c) + (b % c)) % c);
 Console.WriteLine((a * b) % c);
-Console.WriteLine((a % c) * (b % c) % c);
+Console.WriteLine(((a % c) * (b % c)) % c);
