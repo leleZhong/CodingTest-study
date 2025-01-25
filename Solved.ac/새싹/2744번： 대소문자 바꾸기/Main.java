@@ -14,21 +14,17 @@ import java.io.*;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String s = br.readLine();
         StringBuilder sb = new StringBuilder();
 
         for (char c : s.toCharArray()) {
-            if (c >= 97)
-                c -= 32;
+            if (c >= 'a')
+                c -= 'a' - 'A';
             else
-                c += 32;
+                c += 'a' - 'A';
             sb.append(c);
         }
 
-        String output = sb.toString();
-        bw.write(output);
-        bw.flush();
-        bw.close();
+        System.out.println(sb.toString());
 	}
 }
