@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                      :::    :::    :::     */
-/*   Problem Number: 2875                              :+:    :+:      :+:    */
+/*   Problem Number: 17945                             :+:    :+:      :+:    */
 /*                                                    +:+    +:+        +:+   */
-/*   By: lelezhong <boj.kr/u/lelezhong>              +#+    +#+          +#+  */
+/*   By: lelelzhong <boj.kr/u/lelelzhong>            +#+    +#+          +#+  */
 /*                                                  +#+      +#+        +#+   */
-/*   https://boj.kr/2875                           #+#        #+#      #+#    */
-/*   Solved: 2025/01/30 20:39:27 by lelezhong     ###          ###   ##.kr    */
+/*   https://boj.kr/17945                          #+#        #+#      #+#    */
+/*   Solved: 2025/01/31 15:45:31 by lelelzhong    ###          ###   ##.kr    */
 /*                                                                            */
 /* ************************************************************************** */
 import java.io.*;
@@ -16,17 +16,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
 
-        int cnt = 0;
-        while (n >= 2 && m >= 1) {
-            n -= 2;
-            m -= 1;
-            if (n + m >= k)
-                cnt++;
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+
+        if (a * a == b)
+            System.out.print(-a);
+        else {
+            int tmp = (int)Math.sqrt(a * a - b);
+            int root1 = -a - tmp;
+            int root2 = -a + tmp;
+            System.out.printf("%d %d", root1, root2);
         }
-        System.out.print(cnt);
     }
 }

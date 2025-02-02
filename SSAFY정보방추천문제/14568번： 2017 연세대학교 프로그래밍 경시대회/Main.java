@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                      :::    :::    :::     */
-/*   Problem Number: 2875                              :+:    :+:      :+:    */
+/*   Problem Number: 14568                             :+:    :+:      :+:    */
 /*                                                    +:+    +:+        +:+   */
-/*   By: lelezhong <boj.kr/u/lelezhong>              +#+    +#+          +#+  */
+/*   By: lelelzhong <boj.kr/u/lelelzhong>            +#+    +#+          +#+  */
 /*                                                  +#+      +#+        +#+   */
-/*   https://boj.kr/2875                           #+#        #+#      #+#    */
-/*   Solved: 2025/01/30 20:39:27 by lelezhong     ###          ###   ##.kr    */
+/*   https://boj.kr/14568                          #+#        #+#      #+#    */
+/*   Solved: 2025/01/31 13:48:45 by lelelzhong    ###          ###   ##.kr    */
 /*                                                                            */
 /* ************************************************************************** */
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine());
 
         int cnt = 0;
-        while (n >= 2 && m >= 1) {
-            n -= 2;
-            m -= 1;
-            if (n + m >= k)
-                cnt++;
+        for (int i = 2; i <= n - 2; i += 2) {   // ÅÃÈñ
+            for (int j = 1; j < n - i - 1; j++) {   // ¿µÈÆ
+                int k = n - i - j;  // ³²±Ô
+                if (k >= j + 2)
+                    cnt++;
+            }
         }
         System.out.print(cnt);
     }

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                      :::    :::    :::     */
-/*   Problem Number: 2875                              :+:    :+:      :+:    */
+/*   Problem Number: 1075                              :+:    :+:      :+:    */
 /*                                                    +:+    +:+        +:+   */
-/*   By: lelezhong <boj.kr/u/lelezhong>              +#+    +#+          +#+  */
+/*   By: lelelzhong <boj.kr/u/lelelzhong>            +#+    +#+          +#+  */
 /*                                                  +#+      +#+        +#+   */
-/*   https://boj.kr/2875                           #+#        #+#      #+#    */
-/*   Solved: 2025/01/30 20:39:27 by lelezhong     ###          ###   ##.kr    */
+/*   https://boj.kr/1075                           #+#        #+#      #+#    */
+/*   Solved: 2025/01/31 17:58:33 by lelelzhong    ###          ###   ##.kr    */
 /*                                                                            */
 /* ************************************************************************** */
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine());
+        int f = Integer.parseInt(br.readLine());
 
-        int cnt = 0;
-        while (n >= 2 && m >= 1) {
-            n -= 2;
-            m -= 1;
-            if (n + m >= k)
-                cnt++;
+        n /= 100;
+        n *= 100;
+
+        while (n % f != 0) {
+            n++;
         }
-        System.out.print(cnt);
+        System.out.printf("%02d", n % 100);
     }
 }

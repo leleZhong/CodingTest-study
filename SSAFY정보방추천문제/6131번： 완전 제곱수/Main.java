@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                      :::    :::    :::     */
-/*   Problem Number: 2875                              :+:    :+:      :+:    */
+/*   Problem Number: 6131                              :+:    :+:      :+:    */
 /*                                                    +:+    +:+        +:+   */
-/*   By: lelezhong <boj.kr/u/lelezhong>              +#+    +#+          +#+  */
+/*   By: lelelzhong <boj.kr/u/lelelzhong>            +#+    +#+          +#+  */
 /*                                                  +#+      +#+        +#+   */
-/*   https://boj.kr/2875                           #+#        #+#      #+#    */
-/*   Solved: 2025/01/30 20:39:27 by lelezhong     ###          ###   ##.kr    */
+/*   https://boj.kr/6131                           #+#        #+#      #+#    */
+/*   Solved: 2025/01/31 13:35:44 by lelelzhong    ###          ###   ##.kr    */
 /*                                                                            */
 /* ************************************************************************** */
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine());
 
         int cnt = 0;
-        while (n >= 2 && m >= 1) {
-            n -= 2;
-            m -= 1;
-            if (n + m >= k)
-                cnt++;
+        for (int b = 1; b <= 500; b++) {
+            int bSquare = b * b;
+            for (int a = b; a <= 500; a++) {
+                int aSquare = a * a;
+                if (bSquare + n == aSquare)
+                    cnt++;
+            }
         }
         System.out.print(cnt);
     }
