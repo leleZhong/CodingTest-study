@@ -17,27 +17,16 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), ":");
 
-        int[] clock = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
 
-        int[] cases = {0, 2, 4, 6}; // cnt가 1, 2, 3일 때의 경우의 수
+        System.out.print(isValidTime(a, b, c) + isValidTime(a, c, b)
+        + isValidTime(b, a, c) + isValidTime(b, c, a)
+        + isValidTime(c, a, b) + isValidTime(c, b, a));
+    }
 
-        int cnt = 0;
-        int zero = 0;
-        for (int num : clock) {
-            if (num == 0)
-                zero++;
-            else if (num <= 12) {
-                cnt++;
-            }
-            else if (num > 59) {
-                System.out.print(cases[0]);
-                return;
-            }
-        }
-        if (zero == 3) {
-            System.out.print(cases[0]);
-            return;
-        }
-        System.out.print(cases[cnt]);
+    public static int isValidTime(int h, int m, int s) {
+        return (h >= 1 && h <= 12 && m >= 0 && m <= 59 && s >= 0 && s <= 59) ? 1 : 0;
     }
 }
