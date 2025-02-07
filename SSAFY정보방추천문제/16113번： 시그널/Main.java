@@ -10,74 +10,125 @@
 /*                                                                            */
 /* ************************************************************************** */
 import java.io.*;
-import java.util.Arrays;
 
 public class Main {
+    static char[][] arr;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         String signal = br.readLine();
 
-        int[][] decode = new int[5][n / 5];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < n / 5; j++) {
-                decode[i][j] = signal.charAt(i * (n / 5) + j) == '#' ? 1 : 0;
-            }
+        arr = new char[5][n / 5 + 2]; // 마지막 숫자가 1일 경우 대비 
+        for (int i = 0; i < n; i++) {
+            arr[i / (n / 5)][i % (n / 5)] = signal.charAt(i);
         }
 
-        int col = 0;
-        while (col < n / 5) {
-            if (decode[0][col] == 0) {
-                col++;
-                continue;
-            }
+        int idx = 0;
+        while (idx < n / 5) {
+            int num = decode(idx);
 
-            if (col == n / 5 - 1) {
-                sb.append(1);
-                break;
-            }
-
-            if (decode[0][col + 1] == 0) {
-                if (decode[3][col] == 1) {
-                    sb.append(1);
-                    col += 1;
-                }
-                else {
-                    sb.append(4);
-                    col += 3;
-                }
-            }
+            if (num == -1)
+                idx++;
             else {
-                if (decode[1][col] == 1 && decode[1][col+ 2] == 1) {
-                    if (decode[2][col+1] == 0)
-                        sb.append(0);
-                    else {
-                        if (decode[3][col] == 1)
-                            sb.append(8);
-                        else
-                            sb.append(9);
-                    }
-                }
-                else if (decode[1][col] == 0 && decode[1][col+ 2] == 1) {
-                    if (decode[2][col] == 0)
-                        sb.append(7);
-                    else {
-                        if (decode[3][col] == 1)
-                            sb.append(2);
-                        else
-                            sb.append(3);
-                    }
-                }
-                else {
-                    if (decode[3][col] == 0)
-                        sb.append(5);
-                    else
-                        sb.append(6);
-                }
-                col += 3;
+                sb.append(num);
+            
+                if (num == 1)
+                    idx += 2;
+                else
+                    idx += 3;
             }
         }
+
         System.out.print(sb);
     }
+
+    public static int decode(int idx) {
+        if (arr[0][idx] == '.')
+            return -1;
+        
+        outerLoop:
+        for (int i = 0; i < numbers.length; i++) {
+            if (i == 1)
+                continue;
+            
+                for (int j = 0; j < 5; j++) {
+                    for (int k = 0; k < 3; k++) {
+                        if (arr[j][idx + k] != numbers[i][j].charAt(k))
+                            continue outerLoop;
+                    }
+                }
+            return i;
+        }
+        return 1;
+    }
+
+    static String[][] numbers = {
+        {
+            "###",
+            "#.#",
+            "#.#",
+            "#.#",
+            "###"
+        },
+        {
+            // 따로 처리
+        },
+        {
+            "###",
+            "..#",
+            "###",
+            "#..",
+            "###"
+        },
+        {
+            "###",
+            "..#",
+            "###",
+            "..#",
+            "###"
+        },
+        {
+            "#.#",
+            "#.#",
+            "###",
+            "..#",
+            "..#"
+        },
+        {
+            "###",
+            "#..",
+            "###",
+            "..#",
+            "###"
+        },
+        {
+            "###",
+            "#..",
+            "###",
+            "#.#",
+            "###"
+        },
+        {
+            "###",
+            "..#",
+            "..#",
+            "..#",
+            "..#"
+        },
+        {
+            "###",
+            "#.#",
+            "###",
+            "#.#",
+            "###"
+        },
+        {
+            "###",
+            "#.#",
+            "###",
+            "..#",
+            "###"
+        }
+    };
 }
