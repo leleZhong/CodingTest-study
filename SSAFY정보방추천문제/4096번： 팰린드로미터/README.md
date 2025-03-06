@@ -1,9 +1,8 @@
 # 4096번: 팰린드로미터 - <img src="https://static.solved.ac/tier_small/7.svg" style="height:20px" /> Silver IV
 
 <!-- performance -->
-
-<!-- 문제 제출 후 깃허브에 푸시를 했을 때 제출한 코드의 성능이 입력될 공간입니다.-->
-
+### 성능 요약
+메모리: 14460 KB, 시간: 124 ms
 <!-- end -->
 
 ## 문제
