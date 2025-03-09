@@ -44,7 +44,7 @@ public class Main {
         }
 
         public int empty() {
-            return size == 0 ? -1 : 0;
+            return size == 0 ? 1 : 0;
         }
 
         public int front() {
