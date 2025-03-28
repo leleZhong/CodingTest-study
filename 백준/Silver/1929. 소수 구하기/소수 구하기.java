@@ -11,16 +11,20 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
 
-        for (int i = M; i <= N; i++) {
-            if (i == 1) continue;
-            boolean valid = true;
-            for (int j = 2; j * j <= i; j++) {
-                if (i % j == 0) {
-                    valid = false;
-                    break;
+        boolean[] isNotPrime = new boolean[N + 1];
+        isNotPrime[0] = true;
+        isNotPrime[1] = true;
+
+        for (int i = 2; i * i <= N; i++) {
+            if (!isNotPrime[i]) {
+                for (int j = i * i; j <= N; j += i) {
+                    isNotPrime[j] = true;
                 }
             }
-            if (valid)
+        }
+
+        for (int i = M; i <= N; i++) {
+            if (!isNotPrime[i])
                 sb.append(i).append("\n");
         }
 
