@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -14,27 +11,21 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        HashSet<String> arrN = new HashSet<>();
-        for (int i = 0; i < N; i++) {
-            arrN.add(br.readLine());
+        String[] arr = new String[N + M];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = br.readLine();
         }
+
+        Arrays.sort(arr);
 
         int cnt = 0;
-        HashSet<String> arrM = new HashSet<>();
-        List<String> ans = new ArrayList<>();
-        for (int i = 0; i < M; i++) {
-            String input = br.readLine();
-            arrM.add(input);
-            if (arrN.contains(input)) {
-                cnt++;
-                ans.add(input);
-            }
-        }
-
-        ans.sort(Comparator.naturalOrder());
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < ans.size(); i++) {
-            sb.append(ans.get(i)).append("\n");
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i].equals(arr[i + 1])) {
+                cnt++;
+                sb.append(arr[i]).append("\n");
+                i++;
+            }
         }
 
         System.out.println(cnt);
