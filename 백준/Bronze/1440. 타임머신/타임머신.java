@@ -8,32 +8,29 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), ":");
         int[] nums = new int[3];
-        int cntH = 0, cntMS = 0;
         for (int i = 0; i < 3; i++) {
             nums[i] = Integer.parseInt(st.nextToken());
-            if (nums[i] >= 1 && nums[i] <= 12)
-                cntH++;
-            else if (nums[i] <= 59)
-                cntMS++;
-            else {
-                System.out.print(0);
-                return;
-            }
         }
 
         int ans = 0;
-        if (cntH == 0)
-            ans = 0;
-        else if (cntH == 1) {
-            ans = 2;
-        }
-        else if (cntH == 2) {
-            ans = 4;
-        }
-        else {
-            ans = 6;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    if (i == j || i == k || j == k)
+                        continue;
+                    
+                    if (isValid(nums[i], nums[j], nums[k]))
+                        ans++;
+                }
+            }
         }
 
         System.out.print(ans);
+    }
+
+    static boolean isValid(int HH, int MM, int SS) {
+        if (HH >= 1 && HH <= 12 && MM >= 0 && MM <= 59 && SS >= 0 && SS <= 59)
+            return true;
+        return false;
     }
 }
