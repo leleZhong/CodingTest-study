@@ -8,12 +8,11 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         int cnt = 0;
-        for (int i = 1; i <= n / 3; i++) {
-            for (int j = 1; j <= n / 3; j++) {
-                for (int k = 1; k <= n / 3; k++) {
-                    if ((i + j + k) * 3 == n)
-                        cnt++;
-                }
+        for (int i = 3; i < n; i += 3) {
+            for (int j = 3; j < n - i; j += 3) {
+                int k = n - (i + j);
+                if (k % 3 == 0)
+                    cnt++;
             }
         }
 
