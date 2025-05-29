@@ -8,10 +8,10 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         int cnt = 0;
-        for (int i = 3; i < n; i += 3) {
-            for (int j = 3; j < n - i; j += 3) {
+        for (int i = 3; i <= n - 6; i += 3) {
+            for (int j = 3; j <= n - i - 3; j += 3) {
                 int k = n - (i + j);
-                if (k % 3 == 0)
+                if (k % 3 == 0 && k > 0)
                     cnt++;
             }
         }
