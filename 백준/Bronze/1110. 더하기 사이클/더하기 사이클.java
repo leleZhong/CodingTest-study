@@ -10,14 +10,12 @@ public class Main {
         int newNum = N;
         int cnt = 0;
         while (true) {
+            int left = newNum / 10;
             int right = newNum % 10;
-            newNum /= 10;
-            int left = newNum % 10;
-            int sum = right + left;
-            int newRight = sum % 10;
-            newNum = right * 10 + newRight;
 
+            newNum = right * 10 + (left + right) % 10;
             cnt++;
+            
             if (newNum == N) {
                 break;
             }
