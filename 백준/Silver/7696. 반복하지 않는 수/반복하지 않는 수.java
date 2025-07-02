@@ -1,15 +1,14 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<Integer> l = new ArrayList<>();
+        int[] nums = new int[1000001];
+        int cnt = 1;
         boolean[] arr = new boolean[10];
-        for (int i = 1; i <= 123456789; i++) {
+        for (int i = 1; cnt <= 1000000; i++) {
             Arrays.fill(arr, false);
             int tmp = i;
             boolean possible = true;
@@ -22,11 +21,10 @@ public class Main {
                     break;
                 }
             }
-            if (possible)
-                l.add(i);
-
-            if (l.size() > 1000000)
-                break;
+            if (possible) {
+                nums[cnt] = i;
+                cnt++;
+            }
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,7 +34,7 @@ public class Main {
             if (n == 0)
                 break;
 
-            sb.append(l.get(n - 1)).append("\n");
+            sb.append(nums[n]).append("\n");
         }
         System.out.print(sb);
     }
