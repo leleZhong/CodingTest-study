@@ -9,11 +9,10 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         int cnt = 0;
         HashSet<String> set = new HashSet<>();
-        br.readLine();
-        for (int i = 0; i < N - 1; i++) {
+        for (int i = 0; i < N; i++) {
             String s = br.readLine();
             if (s.equals("ENTER"))
-                set = new HashSet<>();
+                set.clear();
             else {
                 if (set.add(s))
                     cnt++;
