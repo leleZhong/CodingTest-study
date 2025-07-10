@@ -21,7 +21,7 @@ public class Main {
             for (int j = 0; j < M; j++) {
                 box[i][j] = Integer.parseInt(st.nextToken());
                 if (box[i][j] == 1)
-                    q.add(new int[] { i, j});
+                    q.add(new int[] { i, j });
                 else if (box[i][j] == 0)
                     unripe++;
             }
@@ -34,34 +34,28 @@ public class Main {
 
         int[] dx = { -1, 1, 0, 0 };
         int[] dy = { 0, 0, -1, 1 };
+        int days = 0;
         while (!q.isEmpty()) {
-            int[] curr = q.poll();
-            int x = curr[0];
-            int y = curr[1];
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                int[] curr = q.poll();
+                int x = curr[0];
+                int y = curr[1];
 
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                for (int j = 0; j < 4; j++) {
+                    int nx = x + dx[j];
+                    int ny = y + dy[j];
 
-                if (isValid(nx, ny) && box[nx][ny] == 0) {
-                    q.add(new int[] { nx, ny });
-                    box[nx][ny] = box[x][y] + 1;    // 토마토가 익은 날 직접 저장
-                    unripe--;
+                    if (isValid(nx, ny) && box[nx][ny] == 0) {
+                        q.add(new int[] { nx, ny });
+                        box[nx][ny] = box[x][y] + 1; // 토마토가 익은 날 직접 저장
+                        unripe--;
+                    }
                 }
             }
+            days++;
         }
-
-        int ans = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                if (box[i][j] == 0) {
-                    System.out.print(-1);
-                    return;
-                }
-                ans = Math.max(ans, box[i][j]);
-            }
-        }
-        System.out.print(ans - 1);  // 초기 익은 토마토가 1이었으므로 보정
+        System.out.print(unripe == 0 ? days - 1 : -1); // 마지막날에 토마토를 익힌 후에도 days++를 하므로 보정해줌 
     }
 
     static boolean isValid(int x, int y) {
