@@ -3,29 +3,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    static int min = Integer.MAX_VALUE;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        dfs(N, 0);
-        System.out.print(min);
-    }
+        int[] dp = new int[N + 1];
+        dp[1] = 0;
 
-    static void dfs(int num, int cnt) {
-        if (min <= cnt) return;
-
-        if (num == 1) {
-            min = Math.min(min, cnt);
-            return;
+        for (int i = 2; i <= N; i++) {
+            dp[i] = dp[i - 1] + 1;
+            if (i % 2 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+            if (i % 3 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 3] + 1);
         }
-
-        if (num % 3 == 0) {
-            dfs(num / 3, cnt + 1);
-        }
-        if (num % 2 == 0) {
-            dfs(num / 2, cnt + 1);
-        }
-        dfs(num - 1, cnt + 1);
+        System.out.print(dp[N]);
     }
 }
