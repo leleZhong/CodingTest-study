@@ -11,6 +11,6 @@ public class Main {
         int U = Integer.parseInt(st.nextToken());
         int L = Integer.parseInt(st.nextToken());
 
-        System.out.print(N >= 1000 && (U >= 8000 || L >= 260) ? "Very Good" : N >= 1000 ? "Good" : "Bad");
+        System.out.print(N >= 1000 ? (U >= 8000 || L >= 260) ? "Very Good" : "Good" : "Bad");
     }
 }
