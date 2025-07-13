@@ -25,28 +25,20 @@ public class Main {
         }
         Arrays.sort(origin);
 
-        int immune = 0;
-        int erdaCool = 0;
-        int erdaCnt = 0;
-        for (int time : erda) {
-            if (time >= erdaCool && time >= immune) {
-                erdaCnt++;
-                erdaCool = time + 100;
-                immune = time + 90;
-            }
-        }
-        
-        immune = 0;
-        int originCool = 0;
-        int originCnt = 0;
-        for (int time : origin) {
-            if (time >= originCool && time >= immune) {
-                originCnt++;
-                originCool = time + 360;
-                immune = time + 90;
-            }
-        }
+        System.out.print(calculate(erda, 100) + " " + calculate(origin, 360));
+    }
 
-        System.out.print(erdaCnt + " " + originCnt);
+    static int calculate(int[] times, int coolTime) {
+        int cnt = 0;
+        int lastCool = 0;
+        int lastImmune = 0;
+        for (int time : times) {
+            if (time >= lastCool && time >= lastImmune) {
+                cnt++;
+                lastCool = time + coolTime;
+                lastImmune = time + 90;
+            }
+        }
+        return cnt;
     }
 }
