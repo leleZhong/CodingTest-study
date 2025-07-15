@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -11,21 +10,26 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        List<Integer> list = new LinkedList<>();
+
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 1; i <= N; i++) {
             list.add(i);
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append('<');
-        int num = 0;
+        sb.append("<");
+        int idx = 0;
         while (!list.isEmpty()) {
-            num = (num + K - 1) % list.size();
-            sb.append(list.remove(num));
-            if (!list.isEmpty())
+            idx = (idx + K - 1) % list.size();
+            sb.append(list.get(idx));
+            list.remove(idx);
+            if (list.size() > 0) {
                 sb.append(", ");
+            }
+            else {
+                sb.append(">");
+            }
         }
-        sb.append('>');
         System.out.print(sb);
     }
 }
