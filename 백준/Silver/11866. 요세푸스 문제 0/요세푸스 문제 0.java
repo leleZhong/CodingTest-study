@@ -18,16 +18,17 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
         sb.append("<");
-        int idx = 0;
+        int idx = K - 1;
         while (!list.isEmpty()) {
-            idx = (idx + K - 1) % list.size();
             sb.append(list.remove(idx));
             if (list.size() > 0) {
                 sb.append(", ");
             }
             else {
                 sb.append(">");
+                break;
             }
+            idx = (idx + K - 1) % list.size();
         }
         System.out.print(sb);
     }
