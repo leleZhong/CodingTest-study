@@ -3,35 +3,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    static int[][] arr = new int[41][2];
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
-        
-        arr[0][0] = 1;
-        arr[1][1] = 1;
+
+        int[][] fib = new int[41][2];
+        fib[0] = new int[]{1, 0};
+        fib[1] = new int[]{0, 1};
+        for (int i = 2; i < fib.length; i++) {
+            fib[i][0] = fib[i - 1][0] + fib[i - 2][0];
+            fib[i][1] = fib[i - 1][1] + fib[i - 2][1];
+        }
 
         StringBuilder sb = new StringBuilder();
-        for (int tc = 0; tc < T; tc++) {
+        while (T --> 0) {
             int N = Integer.parseInt(br.readLine());
-            int[] tmp = fibonacci(N);
-
-            sb.append(tmp[0]).append(" ").append(tmp[1]).append("\n");
+            sb.append(fib[N][0]).append(" ").append(fib[N][1]).append("\n");
         }
-        
+
         System.out.print(sb);
-    }
-
-    static int[] fibonacci(int n) {
-        if (arr[n][0] > 0 || arr[n][1] > 0)
-            return arr[n];
-        else {
-            int[] fib1 = fibonacci(n - 1);
-            int[] fib2 = fibonacci(n - 2);
-            arr[n][0] = fib1[0] + fib2[0];
-            arr[n][1] = fib1[1] + fib2[1];
-            return arr[n];
-        }
     }
 }
