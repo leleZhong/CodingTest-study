@@ -8,13 +8,12 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         while (true) {
-            String s = br.readLine();
-            if (s.equals("0 0")) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int sum = Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken());
+            if (sum == 0) {
                 break;
             }
-
-            StringTokenizer st = new StringTokenizer(s);
-            sb.append(Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken())).append("\n");
+            sb.append(sum).append("\n");
         }
 
         System.out.print(sb);
