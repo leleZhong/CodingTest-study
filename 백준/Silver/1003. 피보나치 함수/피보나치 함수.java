@@ -10,8 +10,8 @@ public class Main {
         int T = Integer.parseInt(br.readLine());
 
         int[][] fib = new int[41][2];
-        fib[0] = new int[]{1, 0};
-        fib[1] = new int[]{0, 1};
+        fib[0][1] = fib[1][0] = 0;
+        fib[0][0] = fib[1][1] = 1;
         for (int i = 2; i < fib.length; i++) {
             fib[i][0] = fib[i - 1][0] + fib[i - 2][0];
             fib[i][1] = fib[i - 1][1] + fib[i - 2][1];
