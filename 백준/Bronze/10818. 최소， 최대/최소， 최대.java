@@ -13,12 +13,8 @@ public class Main {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < N; i++) {
             int num = Integer.parseInt(st.nextToken());
-            if (num < min) {
-                min = num;
-            }
-            if (num > max) {
-                max = num;
-            }
+            min = Math.min(min, num);
+            max = Math.max(max, num);
         }
 
         System.out.print(min + " " + max);
