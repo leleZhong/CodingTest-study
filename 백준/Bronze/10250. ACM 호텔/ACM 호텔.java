@@ -14,7 +14,7 @@ public class Main {
             int H = Integer.parseInt(st.nextToken());
             st.nextToken();
             int N = Integer.parseInt(st.nextToken());
-            sb.append(N % H != 0 ? N % H : H).append(String.format("%02d", N % H != 0 ? N / H + 1 : N / H)).append("\n");
+            sb.append((N % H != 0 ? N % H : H) * 100 + (N % H != 0 ? N / H + 1 : N / H)).append("\n");
         }
 
         System.out.print(sb);
