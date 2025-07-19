@@ -21,15 +21,20 @@ public class Main {
         int max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = i + 1; j < N; j++) {
-                if (arr[i] + arr[j] > M) {
-                    break;
-                }
-                for (int k = j + 1; k < N; k++) {
-                    int sum = arr[i] + arr[j] + arr[k];
-                    if (sum > M) {
-                        break;
+                int two = arr[i] + arr[j];
+                if (two >= M) break;
+
+                int l = j + 1;
+                int r = N - 1;
+                while (l <= r) {
+                    int m = (l + r) / 2;
+                    int sum = two + arr[m];
+                    if (sum <= M) {
+                        max = Math.max(max, sum);
+                        l = m + 1;
+                    } else {
+                        r = m - 1;
                     }
-                    max = Math.max(max, sum);
                 }
             }
         }
