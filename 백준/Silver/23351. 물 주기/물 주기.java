@@ -9,12 +9,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+        int[] arr = new int[N];
+        Arrays.fill(arr, Integer.parseInt(st.nextToken()));
+
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-
-        int[] arr = new int[N];
-        Arrays.fill(arr, K);
 
         int idx = 0;
         int ans = 1;
