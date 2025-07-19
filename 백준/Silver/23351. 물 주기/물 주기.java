@@ -8,21 +8,20 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N];
-        Arrays.fill(arr, Integer.parseInt(st.nextToken()));
+        byte N = Byte.parseByte(st.nextToken());
+        byte K = Byte.parseByte(st.nextToken());
+        byte A = Byte.parseByte(st.nextToken());
+        byte B = Byte.parseByte(st.nextToken());
 
-        int A = Integer.parseInt(st.nextToken());
-        int B = Integer.parseInt(st.nextToken());
+        N /= A;
+        byte[] arr = new byte[N];
+        Arrays.fill(arr, K);
 
         int idx = 0;
         int ans = 1;
         while (true) {
-            for (int i = 0; i < A; i++) {
-                arr[idx + i] += B;
-            }
-            idx += A;
-            idx %= N;
+            arr[idx] += B;
+            idx = (idx + 1) % N;
 
             for (int i = 0; i < N; i++) {
                 if (--arr[i] == 0) {
