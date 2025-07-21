@@ -7,19 +7,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int K = Integer.parseInt(br.readLine());
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < K; i++) {
-            int num = Integer.parseInt(br.readLine());
-            if (num == 0) {
-                stack.pop();
-                continue;
+
+        Stack<Integer> s = new Stack<>();
+        while (K --> 0) {
+            if (s.push(Integer.parseInt(br.readLine())) == 0) {
+                s.pop();
+                s.pop();
             }
-            stack.add(num);
         }
 
         int sum = 0;
-        while (!stack.isEmpty()) {
-            sum += stack.pop();
+        while (s.size() != 0) {
+            sum += s.pop();
         }
 
         System.out.print(sum);
