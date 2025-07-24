@@ -4,35 +4,27 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int K;
-    static int[] arr;
+    static int[][] dp;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        arr = new int[K];
-        recur(0, N);
+        dp = new int[N + 1][K + 1];
+        System.out.print(recur(N, K));
     }
 
-    static void recur(int depth, int start) {
-        if (depth == K) {
-            int ans = 1;
-            for (int i = 0; i < K; i++) {
-                ans *= arr[i];
-            }
-            
-            for (int i = K; i > 0; i--) {
-                ans /= i;
-            }
-
-            System.out.print(ans);
-            return;
+    static int recur(int n, int k) {
+        if (k == 0 || k == n) {
+            return 1;
         }
 
-        arr[depth] = start;
-        recur(depth + 1, start - 1);
+        if (dp[n][k] != 0) {
+            return dp[n][k];
+        }
+
+        return dp[n][k] = recur(n - 1, k - 1) + recur(n - 1, k);
     }
 }
