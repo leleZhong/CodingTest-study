@@ -8,9 +8,7 @@ public class Main {
     static String[] arr;
     static int[] ans;
     static boolean[] visited;
-    static int max = 0;
-    static int min = Integer.MAX_VALUE;
-    static StringBuilder sb = new StringBuilder();
+    static String max, min;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,24 +23,24 @@ public class Main {
         ans = new int[k + 1];
         visited = new boolean[10];
 
-        recur(0);
-
-        String tmp = sb.toString();
-        System.out.print(tmp.substring(0, k + 1) + "\n" + tmp.substring(tmp.lastIndexOf("\n", tmp.length() - 2) + 1));
+        findMax(0);
+        findMin(0);
+        System.out.print(max + "\n" + min);
     }
 
-    static void recur(int depth) {
+    static void findMax(int depth) {
         // 가지치기
-        if (!check(depth)) {
+        if (max != null || !check(depth)) {
             return;
         }
 
         // 기저
         if (depth == k + 1) {
-            for (int i = 0; i < k + 1; i++) {
-                sb.append(ans[i]);
+            StringBuilder sb = new StringBuilder();
+            for (int i : ans) {
+                sb.append(i);
             }
-            sb.append("\n");
+            max = sb.toString();
             return;
         }
 
@@ -54,8 +52,39 @@ public class Main {
 
             ans[depth] = i;
             visited[i] = true;
-            recur(depth + 1);
+            findMax(depth + 1);
             visited[i] = false;
+
+        }
+    }
+
+    static void findMin(int depth) {
+        // 가지치기
+        if (min != null || !check(depth)) {
+            return;
+        }
+
+        // 기저
+        if (depth == k + 1) {
+            StringBuilder sb = new StringBuilder();
+            for (int i : ans) {
+                sb.append(i);
+            }
+            min = sb.toString();
+            return;
+        }
+
+        // 재귀 호출
+        for (int i = 0; i <= 9; i++) {
+            if (visited[i]) {
+                continue;
+            }
+
+            ans[depth] = i;
+            visited[i] = true;
+            findMin(depth + 1);
+            visited[i] = false;
+
         }
     }
 
