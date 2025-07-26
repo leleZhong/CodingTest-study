@@ -7,21 +7,16 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        int cnt3 = N / 3;
         int min = Integer.MAX_VALUE;
-        boolean exact = false;
-        while (cnt3 >= 0) {
-            int remain = N - cnt3 * 3;
-            if (remain % 5 == 0) {
-                int cnt5 = remain / 5;
-                min = Math.min(min, cnt3 + cnt5);
-                exact = true;
+        boolean valid = false;
+        for (int i = 0; i <= N / 5; i++) {
+            int tmp = N - i * 5;
+            if (tmp % 3 == 0) {
+                min = Math.min(min, i + tmp / 3);
+                valid = true;
             }
-            cnt3--;
         }
-        if (exact)
-            System.out.print(min);
-        else
-            System.out.print(-1);
+
+        System.out.print(valid ? min : -1);
     }
 }
