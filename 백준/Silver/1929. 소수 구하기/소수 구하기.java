@@ -6,26 +6,27 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
 
-        boolean[] isNotPrime = new boolean[N + 1];
-        isNotPrime[0] = true;
-        isNotPrime[1] = true;
+        boolean[] check = new boolean[N + 1];
+
+        check[0] = check[1] = true;
 
         for (int i = 2; i * i <= N; i++) {
-            if (!isNotPrime[i]) {
+            if (!check[i]) {
                 for (int j = i * i; j <= N; j += i) {
-                    isNotPrime[j] = true;
+                    check[j] = true;
                 }
             }
         }
 
+        StringBuilder sb = new StringBuilder();
         for (int i = M; i <= N; i++) {
-            if (!isNotPrime[i])
+            if (!check[i]) {
                 sb.append(i).append("\n");
+            }
         }
 
         System.out.print(sb);
