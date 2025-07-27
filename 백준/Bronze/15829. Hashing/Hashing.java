@@ -14,11 +14,12 @@ public class Main {
         for (int i = 0; i < L; i++) {
             long tmp = 1;
             for (int j = 0; j < i; j++) {
-                tmp *= 31 % M;
+                tmp *= r;
+                tmp %= M;
             }
             hash += (arr[i] - 'a' + 1) * tmp % M;
         }
 
-        System.out.print(hash);
+        System.out.print(hash % M);
     }
 }
