@@ -1,53 +1,47 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
 
-        for (int tc = 0; tc < T; tc++) {
+        StringBuilder sb = new StringBuilder();
+        while (T-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int N = Integer.parseInt(st.nextToken());
             int M = Integer.parseInt(st.nextToken());
-            
-            Queue<int[]> queue = new LinkedList<>();
+
             st = new StringTokenizer(br.readLine());
+            ArrayDeque<int[]> print = new ArrayDeque<>();
             for (int i = 0; i < N; i++) {
-                int priority = Integer.parseInt(st.nextToken());
-                queue.offer(new int[]{i, priority});
+                print.add(new int[] { Integer.parseInt(st.nextToken()), i });
             }
 
-            int cnt = 1;
-            while (!queue.isEmpty()) {
-                int[] curr = queue.poll();
-                int idx = curr[0];
-                int prio = curr[1];
-
-                boolean higher = false;
-                for (int[] arr : queue) {
-                    if (arr[1] > prio) {
-                        queue.offer(curr);
-                        higher = true;
+            int cnt = 0;
+            while (!print.isEmpty()) {
+                int[] curr = print.peek();
+                boolean hasHigh = false;
+                for (int[] tmp : print) {
+                    if (curr[0] < tmp[0]) {
+                        print.add(print.poll());
+                        hasHigh = true;
                         break;
                     }
                 }
-                
-                if (higher)
-                    continue;
-                else {
-                    if (idx == M)
-                        break;
+
+                if (!hasHigh) {
+                    int[] printed = print.poll();
                     cnt++;
+                    if (printed[1] == M) { // 인덱스가 M인지 확인!
+                        sb.append(cnt).append("\n");
+                        break;
+                    }
                 }
             }
-
-            sb.append(cnt).append("\n");
         }
 
         System.out.print(sb);
