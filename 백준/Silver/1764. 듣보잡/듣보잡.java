@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -11,21 +13,25 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        String[] arr = new String[N + M];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = br.readLine();
+        HashSet<String> set = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            set.add(br.readLine());
         }
 
-        Arrays.sort(arr);
-
         int cnt = 0;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i].equals(arr[i + 1])) {
+        ArrayList<String> list = new ArrayList<>();
+        while (M --> 0) {
+            String s = br.readLine();
+            if (!set.add(s)) {
+                list.add(s);
                 cnt++;
-                sb.append(arr[i]).append("\n");
-                i++;
             }
+        }
+        Collections.sort(list);
+
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s + "\n");
         }
 
         System.out.println(cnt);
