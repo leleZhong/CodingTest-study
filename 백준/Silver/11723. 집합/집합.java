@@ -1,19 +1,18 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
-    static boolean[] set = new boolean[21];
+    static HashSet<Integer> set = new HashSet<>();
     static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int M = Integer.parseInt(br.readLine());
-
-        for (int i = 0; i < M; i++) {
+        while (M-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-
             switch (st.nextToken()) {
                 case "add":
                     add(Integer.parseInt(st.nextToken()));
@@ -40,41 +39,33 @@ public class Main {
     }
 
     static void add(int x) {
-        if (set[x])
-            return;
-        else
-            set[x] = true;
+        set.add(x);
     }
 
     static void remove(int x) {
-        if (set[x])
-            set[x] = false;
-        else
-            return;
+        set.remove(x);
     }
 
     static void check(int x) {
-        sb.append(set[x] ? 1 : 0).append("\n");
+        sb.append(set.contains(x) ? 1 : 0).append("\n");
     }
 
     static void toggle(int x) {
-        if (set[x])
-            set[x] = false;
-        else
-            set[x] = true;
+        if (set.contains(x)) {
+            set.remove(x);
+        } else {
+            set.add(x);
+        }
     }
 
     static void all() {
-        for (int i = 1; i < 21; i++) {
-            if (!set[i])
-                set[i] = true;
+        set.clear();
+        for (int i = 1; i <= 20; i++) {
+            set.add(i);
         }
     }
 
     static void empty() {
-        for (int i = 1; i < 21; i++) {
-            if (set[i])
-                set[i] = false;
-        }
+        set.clear();
     }
 }
