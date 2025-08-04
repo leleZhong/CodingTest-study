@@ -59,7 +59,6 @@ public class Main {
     }
 
     static void all() {
-        set.clear();
         for (int i = 1; i <= 20; i++) {
             set.add(i);
         }
