@@ -22,11 +22,6 @@ public class Main {
         }
 
         long half = recur(b / 2) % C;
-        
-        if (b % 2 == 0) {
-            return (half * half) % C;
-        } else {
-            return ((half * half) % C * A) % C;
-        }
+        return b % 2 == 0 ? (half * half) % C : ((half * half) % C) * A % C;
     }
 }
