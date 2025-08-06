@@ -19,18 +19,21 @@ public class Main {
         }
 
         int cnt = 0;
-        for (int i = 0; i < arr.length - p.length + 1; i++) {
-            boolean valid = true;
-            for (int j = 0; j < p.length; j++) {
-                if (arr[i + j] != p[j]) {
-                    valid = false;
-                    break;
+        int tmp = 0;
+        for (int i = 1; i < arr.length - 1; i++) {
+            if (arr[i - 1] == 'I' && arr[i] == 'O' && arr[i + 1] == 'I') {
+                tmp++;
+                i++;
+            } else {
+                if (tmp >= N) {
+                    cnt += tmp - N + 1;
                 }
+                tmp = 0;
             }
+        }
 
-            if (valid) {
-                cnt++;
-            }
+        if (tmp >= N) {
+            cnt += tmp - N + 1;
         }
 
         System.out.print(cnt);
