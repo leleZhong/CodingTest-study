@@ -11,27 +11,31 @@ public class Main {
         int K = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
 
-        long[] lan = new long[K];
+        int[] arr = new int[K];
         for (int i = 0; i < K; i++) {
-            lan[i] = Long.parseLong(br.readLine());
+            arr[i] = Integer.parseInt(br.readLine());
         }
-        Arrays.sort(lan);
+        Arrays.sort(arr);
 
-        long mid = 0;
-        long left = 1, right = lan[K - 1];
-        int cnt = 0;
+        long left = 1;
+        long right = arr[K - 1];
+        long ans = 0;
         while (left <= right) {
-            mid = (left + right) / 2;
+            long mid = (left + right) / 2;
 
+            int cnt = 0;
             for (int i = 0; i < K; i++) {
-                cnt += lan[i] / mid;
+                cnt += arr[i] / mid;
             }
-            if (cnt >= N) 
-                left =  mid + 1;
-            else
+
+            if (cnt >= N) {
+                ans = mid;
+                left = mid + 1;
+            } else {
                 right = mid - 1;
-            cnt = 0;
+            }
         }
-        System.out.print(right);
+
+        System.out.print(ans);
     }
 }
