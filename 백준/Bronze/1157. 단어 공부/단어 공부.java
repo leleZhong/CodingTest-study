@@ -3,40 +3,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    static char[] alphabets = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        char[] word = br.readLine().toCharArray();
+        char[] arr = br.readLine().toUpperCase().toCharArray();
 
-        int[] used = new int[alphabets.length / 2];
-        for (char w : word) {
-            for (int j = 0; j < alphabets.length; j++) {
-                if (w == alphabets[j]) {
-                    used[j % 26]++;
-                }
+        int[] alphabet = new int[26];
+        for (int i = 0; i < arr.length; i++) {
+            alphabet[arr[i] - 'A']++;
+        }
+
+        int max = 0;
+        int idx = 0;
+        for (int i = 0; i < 26; i++) {
+            if (max < alphabet[i]) {
+                max = alphabet[i];
+                idx = i;
             }
         }
 
-        int maxCnt = 0;
-        int maxIdx = 0;
-        for (int i = 0; i < used.length; i++) {
-            if (used[i] > maxCnt) {
-                maxCnt = used[i];
-                maxIdx = i;
+        for (int i = 0; i < 26; i++) {
+            if (max == alphabet[i] && idx != i) {
+                System.out.print("?");
+                return;
             }
         }
 
-        int cnt = 0;
-        for (int i = 0; i < used.length; i++) {
-            if (used[i] == maxCnt) {
-                cnt++;
-            }
-        }
-
-        if (cnt == 1)
-            System.out.print(alphabets[maxIdx]);
-        else
-            System.out.print("?");
+        System.out.print((char) (idx + 'A'));
     }
 }
