@@ -1,37 +1,30 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Main {
-    static int N;
-    static int[] arr;
-    static int[] dp;
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-
-        arr = new int[N];
-        for (int i = 0; i < N; i++) {
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
-        dp = new int[N];
-        Arrays.fill(dp, -1);
-
-        dp[0] = arr[0];
-        if (N > 1) {
-            dp[1] = arr[0] + arr[1];
-        }
-        if (N > 2) {
-            dp[2] = Math.max(arr[0] + arr[2], arr[1] + arr[2]);
+        if (N == 1) {
+            System.out.print(arr[1]);
+            return;
         }
 
-        for (int i = 3; i < N; i++) {
-            dp[i] = Math.max(dp[i - 2] + arr[i], dp[i - 3] + arr[i - 1] + arr[i]);
+        int[][] dp = new int[N + 1][3];
+        dp[1][1] = arr[1];
+        dp[2][1] = arr[2];
+        dp[2][2] = arr[1] + arr[2];
+
+        for (int i = 3; i <= N; i++) {
+            dp[i][1] = Math.max(dp[i - 2][1], dp[i - 2][2]) + arr[i];
+            dp[i][2] = dp[i - 1][1] + arr[i];
         }
 
-        System.out.print(dp[N - 1]);
+        System.out.print(Math.max(dp[N][1], dp[N][2]));
     }
 }
