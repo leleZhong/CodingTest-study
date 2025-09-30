@@ -7,12 +7,7 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
 
-        boolean[] arr = new boolean[26];
-        for (int i = 0; i < s.length(); i++) {
-            arr[s.charAt(i) - 'A'] = true;
-        }
-
-        if (arr['M' - 'A'] && arr['O' - 'A'] && arr['B' - 'A'] && arr['I' - 'A'] && arr['S' - 'A']) {
+        if (s.contains("M") && s.contains("O") && s.contains("B") && s.contains("I") && s.contains("S")) {
             System.out.println("YES");
         } else {
             System.out.println("NO");
