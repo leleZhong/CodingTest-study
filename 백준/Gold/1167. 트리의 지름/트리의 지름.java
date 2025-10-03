@@ -55,6 +55,7 @@ class Main {
             if (!visited[arr[0]]) {
                 visited[arr[0]] = true;
                 dfs(arr[0], length + arr[1]);
+                visited[arr[0]] = false;
             }
         }
     }
