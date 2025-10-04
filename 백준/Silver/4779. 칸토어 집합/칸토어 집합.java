@@ -7,26 +7,24 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         String s;
-        while((s = br.readLine()) != null) {
+        String[] dp = new String[13];
+        dp[0] = "-";
+        for (int i = 1; i <= 12; i++) {
+            StringBuilder sb = new StringBuilder();
+            int spaceSize = (int) Math.pow(3, i - 1);
+
+            sb.append(dp[i - 1]);
+            for (int j = 0; j < spaceSize; j++) {
+                sb.append(" ");
+            }
+            sb.append(dp[i - 1]);
+
+            dp[i] = sb.toString();
+        }
+
+        while ((s = br.readLine()) != null) {
             int N = Integer.parseInt(s);
-
-            System.out.println(recur(N));
+            System.out.println(dp[N]);
         }
-    }
-
-    static String recur(int n) {
-        if (n == 0) {
-            return "-";
-        }
-
-        StringBuilder s = new StringBuilder();
-        int size = (int) Math.pow(3, n - 1);
-        s.append(recur(n - 1));
-        for (int i = 0; i < size; i++) {
-            s.append(" ");
-        }
-        s.append(recur(n - 1));
-
-        return s.toString();
     }
 }
