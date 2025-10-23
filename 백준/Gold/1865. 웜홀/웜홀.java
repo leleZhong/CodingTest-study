@@ -49,37 +49,30 @@ class Main {
 
     static boolean bellmanFord(int N, ArrayList<int[]>[] graph) {
         int[] dist = new int[N + 1];
-        for (int start = 1; start <= N; start++) {
-            Arrays.fill(dist, INF);
-            dist[start] = 0;
+        Arrays.fill(dist, 0);  // 모든 정점을 0으로 초기화 (가상의 시작점)
 
-            for (int i = 1; i <= N - 1; i++) {
-                boolean updated = false;
-                for (int u = 1; u <= N; u++) {
-                    if (dist[u] == INF) continue;
-
-                    for (int[] e : graph[u]) {
-                        int v = e[0];
-                        int w = e[1];
-                        if (dist[v] > dist[u] + w) {
-                            dist[v] = dist[u] + w;
-                            updated = true;
-                        }
-                    }
-                }
-                if (!updated) break;
-            }
-
+        for (int i = 1; i <= N - 1; i++) {
             for (int u = 1; u <= N; u++) {
-                if (dist[u] == INF) continue;
                 for (int[] e : graph[u]) {
-                    int v = e[0], w = e[1];
+                    int v = e[0];
+                    int w = e[1];
                     if (dist[v] > dist[u] + w) {
-                        return true;
+                        dist[v] = dist[u] + w;
                     }
                 }
             }
         }
+
+        for (int u = 1; u <= N; u++) {
+            for (int[] e : graph[u]) {
+                int v = e[0];
+                int w = e[1];
+                if (dist[v] > dist[u] + w) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 }
