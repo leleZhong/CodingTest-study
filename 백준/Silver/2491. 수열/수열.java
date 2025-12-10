@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class Main {
@@ -15,23 +14,27 @@ class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int[] big = new int[N];
-        int[] small = new int[N];
-        Arrays.fill(big, 1);
-        Arrays.fill(small, 1);
+        int maxBig = 1;
+        int maxSmall = 1;
+        int currentBig = 1;
+        int currentSmall = 1;
 
         for (int i = 1; i < N; i++) {
             if (arr[i] >= arr[i - 1]) {
-                big[i] = big[i - 1] + 1;
+                currentBig++;
+            } else {
+                currentBig = 1;
             }
+            maxBig = Math.max(maxBig, currentBig);
 
             if (arr[i] <= arr[i - 1]) {
-                small[i] = small[i - 1] + 1;
+                currentSmall++;
+            } else {
+                currentSmall = 1;
             }
+            maxSmall = Math.max(maxSmall, currentSmall);
         }
 
-        Arrays.sort(big);
-        Arrays.sort(small);
-        System.out.println(Math.max(big[N - 1], small[N - 1]));
+        System.out.println(Math.max(maxBig, maxSmall));
     }
 }
