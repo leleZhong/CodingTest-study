@@ -15,21 +15,21 @@ class Main {
         }
 
         // dp[v] = 마지막으로 고른 꽃의 값이 v일 때 최대 아름다움
-        long[] dp = new long[101];
+        int[] dp = new int[101];
         for (int i = 0; i <= 100; i++) {
             dp[i] = -1;
         }
 
-        long max = 0;
+        int max = 0;
 
         for (int i = 0; i < N; i++) {
             int cur = arr[i];
-            long best = 0; // 현재 꽃만 고르는 경우
+            int best = 0; // 현재 꽃만 고르는 경우
 
             // 이전에 고른 꽃의 값 확인
             for (int v = 1; v <= 100; v++) {
                 if (dp[v] != -1) {
-                    long diff = cur - v;
+                    int diff = cur - v;
                     best = Math.max(best, dp[v] + diff * diff);
                 }
             }
