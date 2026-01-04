@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class Main {
@@ -16,12 +17,9 @@ class Main {
 
         // dp[v] = 마지막으로 고른 꽃의 값이 v일 때 최대 아름다움
         int[] dp = new int[101];
-        for (int i = 0; i <= 100; i++) {
-            dp[i] = -1;
-        }
+        Arrays.fill(dp, -1);
 
         int max = 0;
-
         for (int i = 0; i < N; i++) {
             int cur = arr[i];
             int best = 0; // 현재 꽃만 고르는 경우
