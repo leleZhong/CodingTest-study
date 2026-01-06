@@ -11,20 +11,23 @@ class Main {
         int K = Integer.parseInt(st.nextToken());
 
         char[] arr = br.readLine().toCharArray();
-        
-        // 앞쪽 C와 뒤쪽 P 교환 (최대 K번)
+
         int left = 0, right = N - 1;
         int swaps = 0;
         while (left < right && swaps < K) {
-            while (left < right && arr[left] != 'C') left++;
-            while (left < right && arr[right] != 'P') right--;
-            if (left < right) {
-                arr[left] = 'P';
-                arr[right] = 'C';
+            if (arr[left] != 'C') {
                 left++;
-                right--;
-                swaps++;
+                continue;
             }
+            if (arr[right] != 'P') {
+                right--;
+                continue;
+            }
+            arr[left] = 'P';
+            arr[right] = 'C';
+            left++;
+            right--;
+            swaps++;
         }
 
         int[] prefix = new int[N + 1];
