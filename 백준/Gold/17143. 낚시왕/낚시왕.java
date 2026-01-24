@@ -8,44 +8,38 @@ class Main {
     static Shark[][] map;
     static Shark[] sharks;
 
-    static int[] dr = new int[] { 0, -1, 1, 0, 0 };
-    static int[] dc = new int[] { 0, 0, 0, 1, -1 };
+    static int[] dr = new int[] { -1, 1, 0, 0 };
+    static int[] dc = new int[] { 0, 0, 1, -1 };
 
     static class Shark {
         int idx;
         int r, c, s, d, z;
 
         void move() {
-            int t = 0; // 주기
-            if (d == 1 || d == 2) {
-                t = s % (2 * (R - 1));
-            } else {
-                t = s % (2 * (C - 1));
-            }
+            if (d == 0 || d == 1) {
+                int t = 2 * (R - 1);    // 주기
+                int x = d == 1 ? r : (t - r);
+                x = (x + s) % t;
 
-            for (int i = 0; i < t; i++) {
-                int nr = r + dr[d];
-                int nc = c + dc[d];
-                if (nr < 1 || nr > R || nc < 1 || nc > C) {
-                    switch (d) {
-                        case 1:
-                            d = 2;
-                            break;
-                        case 2:
-                            d = 1;
-                            break;
-                        case 3:
-                            d = 4;
-                            break;
-                        case 4:
-                            d = 3;
-                            break;
-                    }
-                    nr = r + dr[d];
-                    nc = c + dc[d];
+                if (x < R) {
+                    r = x;
+                    d = 1;
+                } else {
+                    r = t - x;
+                    d = 0;
                 }
-                r = nr;
-                c = nc;
+            } else {
+                int t = 2 * (C - 1);
+                int x = d == 2 ? c : (t - c);
+                x = (x + s) % t;
+
+                if (x < C) {
+                    c = x;
+                    d = 2;
+                } else {
+                    c = t - x;
+                    d = 3;
+                }
             }
         }
     }
@@ -57,24 +51,24 @@ class Main {
         C = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        map = new Shark[R + 1][C + 1];
+        map = new Shark[R][C];
         sharks = new Shark[M];
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             sharks[i] = new Shark();
 
             sharks[i].idx = i;
-            sharks[i].r = Integer.parseInt(st.nextToken());
-            sharks[i].c = Integer.parseInt(st.nextToken());
+            sharks[i].r = Integer.parseInt(st.nextToken()) - 1;
+            sharks[i].c = Integer.parseInt(st.nextToken()) - 1;
             sharks[i].s = Integer.parseInt(st.nextToken());
-            sharks[i].d = Integer.parseInt(st.nextToken());
+            sharks[i].d = Integer.parseInt(st.nextToken()) - 1;
             sharks[i].z = Integer.parseInt(st.nextToken());
 
             map[sharks[i].r][sharks[i].c] = sharks[i];
         }
 
         int ans = 0;
-        for (int i = 1; i <= C; i++) {
+        for (int i = 0; i < C; i++) {
             ans += fish(i);
             move();
         }
@@ -82,7 +76,7 @@ class Main {
         System.out.println(ans);
     }
     static int fish(int c) {
-        for (int i = 1; i <= R; i++) {
+        for (int i = 0; i < R; i++) {
             if (map[i][c] != null) {
                 Shark s = map[i][c];
                 map[i][c] = null;
@@ -94,7 +88,7 @@ class Main {
     }
 
     static void move() {
-        Shark[][] tmp = new Shark[R + 1][C + 1];
+        Shark[][] tmp = new Shark[R][C];
         for (int idx = 0; idx < M; idx++) {
             if (sharks[idx] == null) continue;
             sharks[idx].move();
@@ -112,7 +106,6 @@ class Main {
                 tmp[r][c] = sharks[idx];
             }
         }
-
         map = tmp;
     }
 }
