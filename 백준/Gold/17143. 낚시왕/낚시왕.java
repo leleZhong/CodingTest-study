@@ -16,7 +16,14 @@ class Main {
         int r, c, s, d, z;
 
         void move() {
-            for (int i = 1; i <= s; i++) {
+            int t = 0; // 주기
+            if (d == 1 || d == 2) {
+                t = s % (2 * (R - 1));
+            } else {
+                t = s % (2 * (C - 1));
+            }
+
+            for (int i = 0; i < t; i++) {
                 int nr = r + dr[d];
                 int nc = c + dc[d];
                 if (nr < 1 || nr > R || nc < 1 || nc > C) {
