@@ -11,20 +11,32 @@ class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int[] arr = new int[N + M];
+        int[] A = new int[N];
+        int[] B = new int[M];
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            A[i] = Integer.parseInt(st.nextToken());
         }
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
-            arr[N + i] = Integer.parseInt(st.nextToken());
+            B[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(arr);
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < N + M; i++) {
-            sb.append(arr[i]).append(" ");
+        int a = 0, b = 0;
+        while (a < N && b < M) {
+            if (A[a] < B[b]) {
+                sb.append(A[a++]).append(" ");
+            } else {
+                sb.append(B[b++]).append(" ");
+            }
+        }
+
+        while (a < N) {
+            sb.append(A[a++]).append(" ");
+        }
+        while (b < M) {
+            sb.append(B[b++]).append(" ");
         }
         System.out.println(sb);
     }
